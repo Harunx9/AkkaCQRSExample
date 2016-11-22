@@ -1,0 +1,14 @@
+﻿@model Gui.ViewModel.CloseViewModel
+@{
+    ViewBag.Title = "Close";
+}
+
+<h2>Close</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.Id)
+    <h3>Do you want close this task</h3>
+    <button type="submit" class="btn btn-danger">Close</button>
+    @Html.ActionLink("NO, GO AWAY!!!", "Details", new { UUID = Model.Id })
+}

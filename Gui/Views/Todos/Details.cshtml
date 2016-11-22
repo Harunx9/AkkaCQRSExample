@@ -1,0 +1,23 @@
+﻿@model Gui.ViewModel.UpdateViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.Id)
+    <div class="form-group">
+        @Html.LabelFor(x => x.Title)
+        @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Desctiption)
+        @Html.TextAreaFor(x => x.Desctiption, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-danger">Update</button>
+}
+@Html.ActionLink("Close Task", "Close", new { uuid = Model.Id }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary" })

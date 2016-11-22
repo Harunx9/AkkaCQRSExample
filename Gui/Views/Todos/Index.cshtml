@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Domain.ReadModel.TodoDetail>
+@{
+    ViewBag.Title = "Index";
+    int index = 0;
+    var grid = new WebGrid(source: Model, columnNames: new[]
+    { "No.", "Name", "Actions"});
+}
+
+<h2>Index</h2>
+
+<div class="row">
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</div>
+
+<div class="row">
+    @Html.ActionLink("All", "Index", new { filter ="all" })
+    @Html.ActionLink("Active", "Index", new { filter = "active" })
+    @Html.ActionLink("Inactive", "Index", new { filter = "inactive" })
+</div>
+
+<div class="row">
+    @grid.GetHtml(columns: grid.Columns(
+    grid.Column(columnName: "No.", header: "No.", format: (item) => index++),
+    grid.Column(columnName: "Name", header: "Name", format: (item) => item.Title),
+    grid.Column(columnName: "Actions", header: "Actions", format: (item) => new HtmlString(
+        @Html.ActionLink("Details", "Details", new { UUID = item.UUID }).ToString() +
+        " " +
+        @Html.ActionLink("Close", "Close", new { UUID = item.UUID }).ToString()
+        )
+    )), htmlAttributes: new { @class = "table" })
+</div>
